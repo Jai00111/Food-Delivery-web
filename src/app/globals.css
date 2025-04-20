@@ -1,0 +1,23 @@
+.input-wrapper{
+  margin:10px;
+
+}
+.input-field{
+  width:200px;
+  height: 30px;
+
+}
+.button{
+  width:200px;
+  height: 30px;
+}
+.container{
+  text-align: center;
+}
+.button-link{
+  border: 0;
+  background-color: transparent;
+  color: skyblue;
+  cursor: pointer;
+  text-decoration: double;
+}
