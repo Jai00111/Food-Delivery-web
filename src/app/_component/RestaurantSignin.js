@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function RestaurantSignin(){
@@ -8,6 +9,8 @@ export default function RestaurantSignin(){
     let[restaurantName,setRestaurantName]=useState("")
     let[address,setAddress]=useState("")
     let[contact,setContact]=useState("")
+
+    let router= useRouter();
 
     async function handleClick(){
         console.log(email)
@@ -27,9 +30,13 @@ export default function RestaurantSignin(){
             method:"POST",
             body:JSON.stringify({email,password,confirmpass,restaurantName,address,contact})
         })
-        let result=await data.json();
-        console.log(result)
-        if(result.success){
+        let response=await data.json();
+        console.log(response)
+        if(response.success){
+            const {result}=response
+            delete result.password;
+            localStorage.setItem("restaurantUser",JSON.stringify(result))
+            router.push("/restaurant/dashboard");
             alert("data has created")
         }
     }
