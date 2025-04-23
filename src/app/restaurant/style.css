@@ -23,3 +23,21 @@
     text-align: center;
     
 }
+.error-msg{
+    position: absolute;
+    padding: 8px;
+    color: red;
+}
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+table , td, button{
+    margin: 10px;
+}
+table img{
+    width: 80px;
+    
+}
