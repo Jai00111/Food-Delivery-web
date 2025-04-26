@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import { foodModel } from "@/app/lib/foodsModel";
 
-export async function GET(req,res){
-    let id= await res.params.id;
+export async function GET(request){
+    const url=new URL(request.url);
+    const id=url.pathname.split('/').pop();
     let success =false
 
     await mongoose.connect(process.env.MONGO_URL)

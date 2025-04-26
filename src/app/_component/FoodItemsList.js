@@ -1,7 +1,8 @@
 
 import { useEffect ,useState} from "react";
-
+import { useRouter } from "next/navigation";
 export default function FoodItemsList(){
+    const router=useRouter();
     const [foodItems, setFoodItems]=useState();
     useEffect(()=>{
         LoadFoodItem();
@@ -11,15 +12,21 @@ export default function FoodItemsList(){
     async function LoadFoodItem(){
         let restorantData=JSON.parse(localStorage.getItem("restaurantUser"))
         let restaurantId=restorantData._id;
-        console.log(restorantData)
         let response= await fetch("http://localhost:3000/api/restaurant/foods/"+restaurantId)
-        response=await response.json();
-        if(response.success){
-            setFoodItems(response.result)
+        if(response.ok){
+            let data=await response.json();
+            if(data.success){
+                setFoodItems(data.result)
+            }
+            else{
+                alert("food item list not load")
+            }
         }
         else{
-            alert("food item list not load")
+            console.log("error",response.status);
         }
+        
+        
     }
 
 
@@ -55,7 +62,7 @@ export default function FoodItemsList(){
                  <td>{item.price}</td>
                  <td><img src={item.img_path} alt=""/></td>
                  <td>{item.description}</td>
-                 <td><button onClick={()=>handleDelete(item._id)}>Delete</button><button>Edit</button></td>
+                 <td><button onClick={()=>handleDelete(item._id)}>Delete</button><button onClick={()=>router.push("dashboard/"+item._id)}>Edit</button></td>
                 </tr>)
                 })}
             </tbody>

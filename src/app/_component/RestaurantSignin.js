@@ -41,7 +41,6 @@ export default function RestaurantSignin(){
         })
 
         let response=await data.json();
-        console.log(response)
         if(response.success){
             const {result}=response
             delete result.password;

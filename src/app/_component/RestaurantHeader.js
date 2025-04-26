@@ -40,7 +40,8 @@ export default function RestaurantHeader(){
                 detail && detail.restaurantName?
                 <>
                 <li><Link href="/">Profile</Link> </li>
-                <li><button onClick={handleLogout}>Logout</button> </li></>:
+                <li><button onClick={handleLogout}>Logout</button> </li>
+                </>:
                 <li>  <Link href="/">LogIn/SignUp</Link>  </li>
             }
             

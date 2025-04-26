@@ -21,13 +21,19 @@ export async function POST(req, res) {
 
   let payload = await req.json();
   let result;
+  let success=false;
   await mongoose.connect(process.env.MONGO_URL);
   if (payload.login) {
     result = await restaurantModel.findOne({ email: payload.email, password: payload.password })
-  } else {
+    success=true;
+  }
+   else {
     let data = new restaurantModel(payload)
     result = await data.save();
+    if(result){
+      success=true;
+    }
   }
 
-  return NextResponse.json({ result: result, success: true })
+  return NextResponse.json({ result: result, success })
 }

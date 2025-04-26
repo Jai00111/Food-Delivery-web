@@ -20,16 +20,7 @@ export default function RestaurantLogin(){
             body:JSON.stringify({email, password , login:true})
         });
        let response= await data.json();
-        // if(response.success){
-        //     const {result}=response;
-        //     delete result.password;
-        //     localStorage.setItem("restaurantUser",JSON.stringify(result))
-        //     router.push("/restaurant/dashboard")
-        //     alert("login success")
-        // }
-        // else{
-        //     alert("login failed")
-        // }
+       
         if (response.success) {
             const { result } = response;
             if (result) {
