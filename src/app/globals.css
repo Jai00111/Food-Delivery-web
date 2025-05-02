@@ -1,3 +1,46 @@
+*:focus{
+  outline: none;
+}
+.header-wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+.header-wrapper ul{
+  display: flex;
+}
+.header-wrapper ul li{
+  list-style-type: none;
+  margin-right: 30px;
+  padding: auto;
+}
+.header-wrapper ul li button{
+ border: none;
+ color: blue;
+ background-color: white;
+ cursor: pointer;
+}
+.footer-wrapper{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  
+}
+.error-msg{
+  position: absolute;
+  padding: 8px;
+  color: red;
+}
+table, th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+table , td, button{
+  margin: 10px;
+}
+
 .input-wrapper{
   margin:10px;
 
@@ -24,4 +67,95 @@
 table img{
   width: 80px;
   
+}
+
+.main-page-banner {
+  background-image: url("https://th.bing.com/th/id/OIP.22dYdLuI_AnuS0IKXuBhDgHaD4?rs=1&pid=ImgDetMain");
+  background-color: rgb(0, 0, 0,0.6);
+  background-blend-mode: multiply;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%; /* ya cover */
+  background-position: center;
+  color: white;
+  text-align: center;
+}
+.search-pannel{
+  background-color: white;
+  padding: 7px;
+  border-radius: 15px;
+  width: 70%;
+  margin: auto;
+}
+.select-input{
+  height: 25px;
+  border: none;
+  width: 30%;
+}
+.search-input{
+  height: 25px;
+  border: none;
+  width: 60%;
+  border-left: 1px solid #ccc;
+  padding-left: 10px;
+}
+.location-list{
+  color: #b6a58f;
+  list-style: none;
+  text-align: left;
+  position:absolute;
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  padding: 0;
+  margin: 2px;
+  margin-top: 1.5vh;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.restro-details{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+justify-content: space-between;
+margin-top: 15px;
+}
+.restro-box{
+  border-radius: 15px;
+  text-align: center;
+  padding: 10px;
+  background-color: rgb(156, 170, 179);
+  width: 300px;
+}
+
+.restaurant-page-banner h1{
+  font-size: 3rem;
+}
+.restrodetail-list{
+  background-color: orange;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.restrodetail-list strong{
+width: 50%;
+}
+.food-details-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  color: orange;
+  padding: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+.menu-wrapper{
+  margin-left: 20px;
+
+}
+.menu-wrapper button{
+  border: none;
+  background-color: orange;
+  color: white;
+  cursor: pointer;
+  border-radius: 15px;
 }
