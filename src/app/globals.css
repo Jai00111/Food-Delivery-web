@@ -145,17 +145,53 @@ width: 50%;
   color: orange;
   padding: 15px;
   align-items: center;
-  margin-bottom: 20px;
-
+  justify-content:space-evenly;
+  border-bottom: 2px solid orange;
 }
-.menu-wrapper{
-  margin-left: 20px;
 
-}
-.menu-wrapper button{
+.food-details-wrapper button{
   border: none;
   background-color: orange;
   color: white;
   cursor: pointer;
   border-radius: 15px;
+}
+.cart1{
+  width: 40%;
+}
+.cart2{
+  width: 20%;
+}
+.cart3{
+  width: 40%;
+}
+.total-wrapper{
+  color: orange;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 2px solid orange;
+}
+.total-wrapper .row{
+  color:orange;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20%;
+  margin-right: 20%;
+  font-weight: bold;
+  padding-top: 10px;
+}
+.total-wrapper .bill-div{
+  width: 70%;
+}
+.total-wrapper .order-button{
+  width: 30%;
+  background-color: orange;
+}
+.total-wrapper button{
+  color: white;
+  background-color: orange;
+  border-radius:15px ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,31 +1,6 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
-// export default function CustomerHeader(props) {
-
-    // const cartStorage= JSON.parse(localStorage.getItem("cart"));
-    // let [cartNum, setCartNum] = useState(cartStorage?.length);
-    // let [cartItem, setCartItem] = useState(cartStorage);
-
-    // useEffect(() => {
-    //     if (props.cartData) {
-    //         if (cartNum) {
-    //                 let localCartItem=cartItem;
-    //                 localCartItem.push(JSON.parse(JSON.stringify(props.cartData)))
-    //                 setCartItem(localCartItem)
-    //                 setCartNum(cartNum+1);
-    //                 localStorage.setItem('cart',JSON.stringify(localCartItem))
-    //         }
-    //         else {
-    //             setCartNum(1);
-    //             setCartItem([props.cartData]);
-    //             localStorage.setItem("cart",JSON.stringify([props.cartData]))
-    //         }
-            
-    //     }
-
-    // }, [props.cartData])
-
 
 export default function CustomerHeader(props) {
     let [cartNum, setCartNum] = useState(0);
@@ -65,7 +40,20 @@ export default function CustomerHeader(props) {
       }
     }, [props.cartData]);
 
-    
+    useEffect(()=>{
+        if(props.removeCartData){
+            let localCartItem=cartItem.filter((item)=>{
+                return item._id!=props.removeCartData;
+            });
+            setCartItem(localCartItem);
+            setCartNum(cartNum-1);
+            localStorage.setItem('cart',JSON.stringify(localCartItem));
+            if(localCartItem.length===0){
+                localStorage.clear('cart')
+            }
+        }
+    },[props.removeCartData])
+
     return (
         <div className="header-wrapper">
             <div className="logo">
@@ -79,7 +67,7 @@ export default function CustomerHeader(props) {
                     <Link href="/">SignUp</Link>
                 </li>
                 <li>
-                    <Link href="/">Cart({cartNum?cartNum:0})</Link>
+                    <Link href={cartNum>0?"/cartpage":"#"}>Cart({cartNum?cartNum:0})</Link>
                 </li>
                 <li>
                     <Link href="/">Add Restaurant</Link>

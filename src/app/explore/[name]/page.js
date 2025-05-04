@@ -12,7 +12,7 @@ export default function Page({ params }) {
     let restroname = use(params).name;
     let [cartItems, setCartItems] = useState([])
     let [cartIds, setCartIds] = useState([])
-
+    let [removeCartData, setRemoveCartData] = useState();
     useEffect(() => {
         const storedCart = localStorage.getItem('cart');
         if (storedCart) {
@@ -44,13 +44,29 @@ export default function Page({ params }) {
     }
 
     function addToCart(item) {
+        let localCartId = cartIds;
+        localCartId.push(item._id);
+        setCartIds(localCartId)
         setCartData(item);
-        cartIds.push(item._id);
-        
+        setRemoveCartData()
     }
+
+    // function handleRemove(id) {
+    //     setRemoveCartData(id);
+    //     // let localId = cartIds.filter(item => item !== id);
+    //     // setCartIds(localId);
+    //     setCartIds(cartIds.filter((item) => (item !== id)))
+    //     setCartData();
+    // }
+    function handleRemove(id) {
+        setRemoveCartData(id);
+        setCartIds(cartIds.filter((item) => item !== id));
+        setCartData();
+      }
+
     return (
         <>
-            <CustomerHeader cartData={cartdata} />
+            <CustomerHeader cartData={cartdata} removeCartData={removeCartData} />
             <div className="restaurant-page-banner"><h1 className="main-page-banner">{decodeURI(restroname)}</h1>
                 {
                     restodetails && <div className="restrodetail-list" >
@@ -66,19 +82,23 @@ export default function Page({ params }) {
                     <div>
                         <img src={item.img_path} alt="" height="200px" width="200px"></img></div>
 
-                    <div className="menu-wrapper">
+                    <div>
                         <strong>{item.name}</strong>
-                        <p>{item.price}</p>
+                        <p className="description">{item.price}</p>
                         <p>{item.description}</p>
                         {
-                            cartIds.includes(item._id)?<button>Remove from cart</button>
-                            :<button onClick={() => addToCart(item)}> Add to Cart</button>
+                            cartIds.includes(item._id) ? <button onClick={() => handleRemove(item._id)}>Remove from cart</button>
+                                : <button onClick={() => addToCart(item)}> Add to Cart</button>
                         }
-                        
+
                     </div>
+                    
                 </div>
+                
             ))
+            
             }
+            
 
         </>
     )
