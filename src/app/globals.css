@@ -18,6 +18,8 @@
  color: blue;
  background-color: white;
  cursor: pointer;
+ margin:auto;
+ padding: auto;
 }
 .footer-wrapper{
   position: fixed;
@@ -194,4 +196,26 @@ width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.auth-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-wrapper{
+  margin: auto;
+  height: 400px;
+  border: 1px solid lightblue;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+.signup-wrapper{
+  margin: auto;
+  height: 400px;
+  border: 1px solid lightblue;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
 }

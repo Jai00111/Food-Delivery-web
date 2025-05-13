@@ -2,15 +2,19 @@
 import { DELIVERY_CHARGES, Tax } from "../lib/constant";
 import { useEffect, useState } from "react";
 import CustomerHeader from "../_component/CustomerHeader";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
     let [cartStorage, setCartStorage] = useState([]);
     let [total, setTotal] = useState(0);
+    const router = useRouter();
 
     useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem('cart'))
-        setCartStorage(localData);
-    }, [])
+        const localData = JSON.parse(localStorage.getItem('cart'));
+        if (localData) {
+            setCartStorage(localData);
+        }
+    }, []);
 
     useEffect(() => {
         if (cartStorage && cartStorage.length > 0) {
@@ -25,17 +29,25 @@ export default function CartPage() {
     }, [cartStorage]);
 
 
+
     function handleRemove(id) {
-        setCartStorage(cartStorage.filter((item) => item._id !== id));
-        setCartStorage();
+        let updatedCart = cartStorage.filter((item) => item._id !== id);
+        setCartStorage(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
     }
 
-
+    function handleClick() {
+        if (JSON.parse(localStorage.getItem("user"))) {
+            router.push("/order", { scroll: false });
+        } else {
+            router.push("/user-auth?redirect=/order&order=true");
+        }
+    }
     return (
         <>
             <CustomerHeader />
             {
-                cartStorage.length > 0 ? cartStorage.map((item, idx) => (
+                cartStorage?.length > 0 ? cartStorage.map((item, idx) => (
                     <div key={idx} className="food-details-wrapper" >
                         <div className="cart1">
                             <img src={item.img_path} alt="" height="200px" width="200px"></img></div>
@@ -63,7 +75,7 @@ export default function CartPage() {
                     </div>
                     <div className="row">
                         <span>Tax:</span>
-                        <span>{total*Tax/100}</span>
+                        <span>{total * Tax / 100}</span>
                     </div>
                     <div className="row">
                         <span>Delivery Charges:</span>
@@ -71,11 +83,11 @@ export default function CartPage() {
                     </div>
                     <div className="row">
                         <span>Total Amount:</span>
-                        <span>{total+total*Tax/100 +DELIVERY_CHARGES}</span>
+                        <span>{total + total * Tax / 100 + DELIVERY_CHARGES}</span>
                     </div>
                 </div>
-                <div className="order-button">
-                    <button>Order Now</button>
+                <div >
+                    <button onClick={handleClick}>Order Now</button>
                 </div>
             </div>
 
