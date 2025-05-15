@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import DeliveryHeader from "../_component/DeliveryHeader"
 
@@ -16,6 +16,14 @@ export default function UserLogin(props) {
 
     const searchParams = useSearchParams();
     const order = searchParams.get('order')
+
+
+    useEffect(()=>{
+        if(localStorage.getItem("delivery")){
+            router.push("deliverydashboard")
+        }
+    },[])
+
 
     async function handleClick() {
         let response = await fetch("http://localhost:3000/api/deliverypartners/signup", {
@@ -47,14 +55,17 @@ export default function UserLogin(props) {
             const { result } = response;
             delete result.password;
             localStorage.setItem("delivery", JSON.stringify(result))
-            alert("success");
+            router.push("/deliverydashboard")
         } else {
             alert("failed to login, please try again with the valid mobile and password")
         }
     }
     return (
-        <div className="auth-container">
+        <div>
             <DeliveryHeader/>
+       
+        <div className="auth-container">
+            
             <div className="login-wrapper">
                 <h3>LogIn</h3>
                 <div className="input-wrapper">
@@ -119,5 +130,6 @@ export default function UserLogin(props) {
                 </div>
             </div>
         </div>
+         </div>
     )
 }

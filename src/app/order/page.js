@@ -43,7 +43,18 @@ export default function CartPage() {
         let cart=JSON.parse(localStorage.getItem("cart"));
         let restro_Id=cart[0].restro_id;
         let foodItem_Id=cart.map((item)=>item._id.toString());
-        let deliveryBoy_Id="680c76ba8def7fd7f4e51c12";
+        let city=JSON.parse(localStorage.getItem("user")).address;
+        let deliveryboyResponse=await fetch("http://localhost:3000/api/deliverypartners/"+city);
+        deliveryboyResponse=await deliveryboyResponse.json();
+        let deliveryboyIds=deliveryboyResponse.result.map((item)=>(item._id));
+
+        let deliveryBoy_Id=deliveryboyIds[Math.floor(Math.random( )*deliveryboyIds.length)];
+        console.log(deliveryBoy_Id);
+        if(!deliveryBoy_Id){
+         
+            alert("deliveryboy not available")
+            return false;
+        }
         
         let collection={
             user_Id,

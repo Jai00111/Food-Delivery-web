@@ -89,7 +89,7 @@ export default function CustomerHeader(props) {
                     <Link href="/">Add Restaurant</Link>
                 </li>
                 <li>
-                    <Link href="deliverydashboard">Delivery-Dashboard</Link>
+                    <Link href="deliverypartner">Delivery-Partner</Link>
                 </li>
                 {
                     user?<><li>
